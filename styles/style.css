@@ -1,0 +1,88 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,h2 {
+	margin: 0;
+}
+
+.title {
+	background-color:#aaa;
+	font-family:"Courier New";
+	font-size:1.2em;
+	text-align: center;
+	border-radius: 8px;
+	width: 99.5%;
+	padding: 10px 0px 1px 0px;
+	margin: 3px;
+}
+
+.flex-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+@media (max-width: 800px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+
+.button {
+  background-color: #555555; 
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px;
+}
+
+.button:hover {
+  opacity: 0.7;
+}
+
+.select {
+  background-color: #bbb; 
+  border: none;
+  border-radius: 8px;
+  color: black;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px;
+  opacity: 0.9;
+}
+
+.select:hover {
+  opacity: 1;
+}
+
+
+.content {
+  background-color: #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+}
