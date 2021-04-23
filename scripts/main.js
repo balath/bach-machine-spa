@@ -10,8 +10,9 @@ function loadPrologFile(){
 }
 
 function loadPecPDF(){
-	document.getElementById('home-msg').style.display = "none";
-	document.getElementById('cont').innerHTML = '<embed src="files/pec-pdf.pdf" type="application/pdf" width="90%" height="1000px"/>'; 	
+	alert('El archivo de la memoria esta en construcción');
+	//document.getElementById('home-msg').style.display = "none";
+	//document.getElementById('cont').innerHTML = '<embed src="files/pec-pdf.pdf" type="application/pdf" width="90%" height="1000px"/>'; 	
 }	
 
 //Management of Prolog harmony generation
