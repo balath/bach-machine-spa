@@ -20,17 +20,19 @@ const prologFile = 'bach.pl';
 
 const formatNote = note => note.replaceAll('_s','♯').replaceAll('_b','♭');	
 
-const reduceToHtmlParagraphs = (acc, string) => `${acc} <p>${string}</p>`;
-
-const makeHtmlDiv = content => `<div>${content}</div>`;
+const makeChordsTable = content => `<table id="chords-table"><tr><th>Cifrado</th><th>Acordes</th></tr>${content}</table>`;
 
 const parseAnswer = answer => { 
-	const chords = answer.links.Chords.toJavaScript().flatMap(_ => _).map(_ => formatNote(_.join(' - '))).reduce(reduceToHtmlParagraphs);
-	const code = answer.links.Code.toJavaScript().flatMap(_ => _).map(_ => _.join("")).reduce(reduceToHtmlParagraphs);
-	document.getElementById('cont').innerHTML = `${makeHtmlDiv(code)} ${makeHtmlDiv(chords)}`;
+	const chords = answer.links.Chords.toJavaScript().flatMap(_ => _).map(_ => formatNote(_.join(' - ')));
+	const code = answer.links.Code.toJavaScript().flatMap(_ => _).map(_ => _.join(""));
+	const tableRows = code
+		.map((code,index) => `<td>${code}</td><td>${chords[index]}</td>`)
+		.reduce((acc,row) => `${acc} <tr>${row}</tr>`);
+	
+	document.getElementById('cont').innerHTML = `${makeChordsTable(tableRows)}`;
 };
 
-function generate(){
+function generate(){	
 	const tono = document.getElementById('tonos').value;
 	//Creating a session with Tau-Prolog
 	let session = pl.create();

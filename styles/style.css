@@ -40,9 +40,32 @@ h1,h2 {
 .flex-content {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  text-align: left;
-  
+  justify-content: center;  
+}
+
+#chords-table {
+  border-collapse: collapse;
+  width: 300px;
+  border-spacing: 12px;
+}
+
+#chords-table th {
+  border-bottom: 1px solid #555555;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #555555;
+  color: white;
+}
+
+#chords-table td {
+  border-bottom: 1px solid #555555;
+  background-color: #ccc;
+  padding: 8px;
+}
+
+#chords-table tr td:nth-child(2)  {
+    text-align: center;
 }
 
 .button {
