@@ -6,6 +6,8 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #ddd;
+  padding: 10px;
 }
 
 h1,h2 {
@@ -23,21 +25,23 @@ h1,h2 {
 	margin: 3px;
 }
 
-.flex-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-container {
+.flex-button-bar {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-@media (max-width: 800px) {
-  .flex-container {
+@media (max-width: 1200px) {
+  .flex-button-bar {
     flex-direction: column;
   }
+}
+
+.flex-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  
 }
 
 .button {
@@ -73,13 +77,6 @@ h1,h2 {
 
 .select:hover {
   opacity: 1;
-}
-
-
-.content {
-  background-color: #ddd;
-  padding: 10px;
-  text-align: left;
 }
 
 .footer {

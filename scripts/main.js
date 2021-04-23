@@ -21,13 +21,17 @@ function formatNote(note){
 	return note.replaceAll('_s','♯').replaceAll('_b','♭');	
 }
 
+function addP(acc, paragraph){
+}
+
 const parseAnswer = function( answer ) { 
-	const chords = answer.links.Chords.toJavaScript().flatMap(_ => _);
-	const code = answer.links.Code.toJavaScript().flatMap(_ => _).map(_ => _.join(""));
-	const codeHTML = code
-		.map((cif,index) => cif + "\t" + formatNote(chords[index].toString()))
-		.reduce((z,e) => z+"<p>"+e+"</p>");	
-	document.getElementById('cont').innerHTML = codeHTML;
+	const chords = answer.links.Chords.toJavaScript().flatMap(_ => _).map(_ => formatNote(_.toString())).reduce((acc,elem) => acc+"<p>"+elem+"</p>");
+	const code = answer.links.Code.toJavaScript().flatMap(_ => _).map(_ => _.join("")).reduce((acc,elem) => acc+"<p>"+elem+"</p>");
+	
+	//const codeHTML = code
+	//	.map((cif,index) => cif + "\t" + formatNote(chords[index].toString()))
+	//	.reduce((z,e) => z+"<p>"+e+"</p>");	
+	document.getElementById('cont').innerHTML = "<div>" +code +"</div> <div>" +chords +"</div>";
 };
 
 function generate(){
