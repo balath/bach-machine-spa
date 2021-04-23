@@ -1,8 +1,9 @@
 ﻿
-<html>
+<html lang="es">
 <head>
-<title>Bach-machine</title>
 <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bach-machine</title>
 <link href="styles/style.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="scripts/tau-prolog.js"></script>
 </head>
@@ -17,18 +18,17 @@
 		
 		<div class="flex-button-bar">
 		
-		  <button class="button" style="flex-grow: 1" onclick="loadHome()">Inicio</button>
-		  <button class="button" style="flex-grow: 1" onclick="loadPrologFile()">Código Prolog</button>
-		  <button class="button" style="flex-grow: 1" onclick="loadPecPDF()">Memoria</button>
+		  <button class="button" onclick="loadHome()">Inicio</button>
+		  <button class="button" onclick="loadPrologFile()">Código Prolog</button>
+		  <button class="button" onclick="loadPecPDF()">Memoria</button>
 		  
 		</div>
 	
 		<div id="home-msg" align="center">
 			<br>
 			<form id="tono" action="prolog.js">
-			  Para generar la armonía de un coral, selecciona un tono del desplegable y pulsa Generar:
 			  <br><br>
-			  <select class="select" id="tonos">
+			  <label for="tonos">Tono del Coral:</label> <select class="select" id="tonos">
 				<option value= "do" selected>Do</option>
 				<option value= "do_s" >Do♯</option>
 				<option value= "re_b">Re♭</option>

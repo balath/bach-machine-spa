@@ -79,6 +79,7 @@ h1,h2 {
   display: inline-block;
   font-size: 16px;
   margin: 2px;
+  flex-grow: 1;
 }
 
 .button:hover {
