@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Bach-machine</title>
 <link href="styles/style.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="scripts/tau-prolog.js"></script>	
+	<script type="text/javascript" src="scripts/tau-prolog.js"></script>
 </head>
-
 <body>
 
 	<div class="content">
@@ -25,11 +24,11 @@
 		  
 		</div>
 	
-		<div class= "home-msg"id="home-msg">
+		<div id="home-msg" align="center">
 			<br>
 			<form id="tono" action="prolog.js">
-			  <br>
-			  <label for="tonos">Tono del Coral:</label> <select class="content-elems" id="tonos">
+			  <br><br>
+			  <label for="tonos">Tono del Coral:</label> <select class="select" id="tonos">
 				<option value= "do" selected>Do</option>
 				<option value= "do_s" >Do♯</option>
 				<option value= "re_b">Re♭</option>
@@ -46,14 +45,8 @@
 				<option value= "si">Si</option>
 				<option value= "do_b">Do♭</option>
 			  </select>
-			  <input class="content-elems" type="button" value="Generar" onclick="generate()">
+			  <input class="select" type="button" value="Generar" onclick="generate()">
 			</form>
-		</div>
-		
-		<div class="flex-content" id="pass-msg">
-			<br>
-			<label for="pass-box">Contraseña:</label> <input type="text" id="pass-box">
-			<input type="button" value="Ok" onclick="passPrologFile()">
 		</div>
 		
 		<div class="flex-content" id="cont">
