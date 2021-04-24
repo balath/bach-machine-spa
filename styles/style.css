@@ -37,8 +37,13 @@ h1,h2 {
   }
 }
 
+.home-msg {
+	display:flex;
+	justify-content: center;  
+}
+
 .flex-content {
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: center;  
 }
@@ -86,7 +91,7 @@ h1,h2 {
   opacity: 0.7;
 }
 
-.select {
+.content-elems {
   background-color: #bbb; 
   border: none;
   border-radius: 8px;
@@ -100,7 +105,7 @@ h1,h2 {
   opacity: 0.9;
 }
 
-.select:hover {
+.content-elems:hover {
   opacity: 1;
 }
 

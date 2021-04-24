@@ -1,12 +1,22 @@
 
 function loadHome(){
-	document.getElementById('home-msg').style.display = "block";
+	document.getElementById('home-msg').style.display = "flex";
 	document.getElementById('cont').innerHTML = '';
+	document.getElementById('pass-msg').style.display = "none";
 }
 
 function loadPrologFile(){
 	document.getElementById('home-msg').style.display = "none";
-	document.getElementById('cont').innerHTML = '<embed src="files/bach-machine.html" type="text/html" width="90%" height="1000px"/>'; 	
+	document.getElementById('pass-msg').style.display = "flex";
+}
+
+function passPrologFile(){
+	const pass = document.getElementById('pass-box').value;
+	const passSecret = process.env.PASSWORD;
+	if (pass == passSecret) {
+		document.getElementById('cont').innerHTML = '<embed src="files/bach-machine.html" type="text/html" width="90%" height="1000px"/>'; 	
+		document.getElementById('pass-msg').style.display = "none";
+	}
 }
 
 function loadPecPDF(){
@@ -43,44 +53,22 @@ function generate(){
 	session.answer(parseAnswer);
 };
 
-//Midi
-
-function listInputsAndOutputs( midiAccess ) {
-  for (var entry of midiAccess.inputs) {
-    var input = entry[1];
-    console.log( "Input port [type:'" + input.type + "'] id:'" + input.id +
-      "' manufacturer:'" + input.manufacturer + "' name:'" + input.name +
-      "' version:'" + input.version + "'" );
-  }
-
-  for (var entry of midiAccess.outputs) {
-    var output = entry[1];
-    console.log( "Output port [type:'" + output.type + "'] id:'" + output.id +
-      "' manufacturer:'" + output.manufacturer + "' name:'" + output.name +
-      "' version:'" + output.version + "'" );
-  }
-}
-var midi = null;  // global MIDIAccess object
-
-function onMIDISuccess( midiAccess ) {
-  console.log( "MIDI ready!" );
-  midi = midiAccess;  // store in the global (in real usage, would probably keep in an object instance)
-  listInputsAndOutputs(midi);
-}
-
-function onMIDIFailure(msg) {
-  console.log( "Failed to get MIDI access - " + msg );
-}
-
-navigator.requestMIDIAccess().then( onMIDISuccess, onMIDIFailure );
-
-
-
-
-function sendMiddleC( midiAccess, portID ) {
-  var noteOnMessage = [0x90, 60, 0x7f];    // note on, middle C, full velocity
-  var output = midiAccess.outputs.get(portID);
-  output.send( noteOnMessage );  //omitting the timestamp means send immediately.
-  output.send( [0x80, 60, 0x40], window.performance.now() + 1000.0 ); // Inlined array creation- note off, middle C,
-                                                                      // release velocity = 64, timestamp = now + 1000ms.
-}
+/*Midi
+window.onload = function () {
+	MIDI.loadPlugin({
+		soundfontUrl: "./js/util/",
+		instrument: "acoustic_grand_piano",
+		onprogress: function(state, progress) {
+			console.log(state, progress);
+		},
+		onsuccess: function() {
+			var delay = 0; // play one note every quarter second
+			var note = 50; // the MIDI note
+			var velocity = 127; // how hard the note hits
+			// play the note
+			MIDI.setVolume(0, 127);
+			MIDI.noteOn(0, note, velocity, delay);
+			MIDI.noteOff(0, note, delay + 0.75);
+		}
+	});
+};*/
