@@ -1,3 +1,9 @@
+:root {
+  --back: #ddd;
+  --hard-contrast: #555555;
+  --medium-contrast: #aaa;
+  --soft-contrast: #ccc;
+}
 
 * {
   box-sizing: border-box;
@@ -6,7 +12,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #ddd;
+  background-color: var(--back);
   padding: 10px;
 }
 
@@ -15,7 +21,7 @@ h1,h2 {
 }
 
 .title {
-	background-color:#aaa;
+	background-color:var(--medium-contrast);
 	font-family:"Courier New";
 	font-size:1.2em;
 	text-align: center;
@@ -50,17 +56,17 @@ h1,h2 {
 }
 
 #chords-table th {
-  border-bottom: 1px solid #555555;
+  border-bottom: 1px solid var(--hard-contrast);
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #555555;
+  background-color: var(--hard-contrast);
   color: white;
 }
 
 #chords-table td {
-  border-bottom: 1px solid #555555;
-  background-color: #ccc;
+  border-bottom: 1px solid var(--hard-contrast);
+  background-color: var(--soft-contrast);
   padding: 8px;
 }
 
@@ -69,7 +75,7 @@ h1,h2 {
 }
 
 .button {
-  background-color: #555555; 
+  background-color: var(--hard-contrast); 
   border: none;
   border-radius: 8px;
   color: white;
@@ -87,7 +93,7 @@ h1,h2 {
 }
 
 .select {
-  background-color: #bbb; 
+  background-color: var(--medium-contrast); 
   border: none;
   border-radius: 8px;
   color: black;
@@ -104,7 +110,10 @@ h1,h2 {
   opacity: 1;
 }
 
-.footer {
-  background-color: #f1f1f1;
-  padding: 10px;
+footer {
+  text-align: center;
+  padding: 3px;
+  background-color: var(--medium-contrast);
+  color: white;
 }
+
