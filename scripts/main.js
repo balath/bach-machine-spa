@@ -42,7 +42,7 @@ const prologProgram = `
 
 :- use_module(library(random)).
 
-% 1. Notas musicales:
+%  1. Notas musicales:
 
 do_b.
 do.
@@ -80,6 +80,7 @@ seg_min(fa,sol_b).
 seg_min(fa_s,sol).
 seg_min(sol,la_b).
 seg_min(sol_s,la).
+seg_min(la_b,si_b_b).
 seg_min(la,si_b).
 seg_min(la_s,si).
 seg_min(si_b,do_b).
@@ -103,9 +104,11 @@ seg_maj(sol_s,la_s).
 seg_maj(la_b,si_b).
 seg_maj(la,si).
 seg_maj(la_s,si_s).
+seg_maj(si_b_b,do_b).
 seg_maj(si_b,do).
 seg_maj(si,do_s).
 
+ter_min(do_b,mi_b_b).
 ter_min(do,mi_b).
 ter_min(do_s,mi).
 ter_min(re_b,fa_b).
@@ -114,9 +117,11 @@ ter_min(re_s,fa_s).
 ter_min(mi_b,sol_b).
 ter_min(mi,sol).
 ter_min(mi_s,sol_s).
+ter_min(fa_b,la_b_b).
 ter_min(fa,la_b).
 ter_min(fa_s,la).
 ter_min(fa_s_s,la_s).
+ter_min(sol_b,si_b_b).
 ter_min(sol,si_b).
 ter_min(sol_s,si).
 ter_min(la_b,do_b).
@@ -190,132 +195,128 @@ qui_jus(si,fa_s).
 
 % 3. Modos mayor/menor
 
-esc_maj(I,[I,II,III,IV,V,VI,VII]) :- seg_maj(I,II),seg_maj(II,III),seg_min(III,IV),seg_maj(IV,V),seg_maj(V,VI),seg_maj(VI,VII),seg_min(VII,I).
-esc_min(I,[I,II,III,IV,V,VI,VII]) :- seg_maj(I,II),seg_min(II,III),seg_maj(III,IV),seg_maj(IV,V),seg_min(V,VI),seg_maj(VI,VII),seg_maj(VII,I).
+esc_maj(I,[I,II,III,IV,V,VI,VII]) :- seg_maj(I,II),seg_maj(II,III),seg_min(III,IV),seg_maj(IV,V),seg_maj(V,VI),seg_maj(VI,VII).
+esc_min(I,[I,II,III,IV,V,VI,VII]) :- seg_maj(I,II),seg_min(II,III),seg_maj(III,IV),seg_maj(IV,V),seg_min(V,VI),seg_maj(VI,VII).
 
-% 4. Acordes (formato xxxx_xxx)
+% 4. Acordes 
 
-% 4.1 Triadas
+	% 4.1 Triadas
 
-perf_maj([I,III,V]) :- ter_maj(I,III),ter_min(III,V).
-perf_min([I,III,V]) :- ter_min(I,III),ter_maj(III,V).
-quin_dis([I,III,V]) :- ter_min(I,III),ter_min(III,V).
-quin_aug([I,III,V]) :- ter_maj(I,III),ter_maj(III,V).
+	perf_maj([I,III,V]) :- ter_maj(I,III),ter_min(III,V).
+	perf_min([I,III,V]) :- ter_min(I,III),ter_maj(III,V).
+	quin_dis([I,III,V]) :- ter_min(I,III),ter_min(III,V).
+	quin_aug([I,III,V]) :- ter_maj(I,III),ter_maj(III,V).
+	
+	% 4.2 Cuatriadas
 
-triada(X) :- perf_maj(X);perf_min(X);quin_dis(X);quin_aug(X).
-
-% 4.2 Cuatriadas
-
-sept_min([I,III,V,VII]) :- ter_maj(I,III),ter_min(III,V),ter_min(V,VII).
-sept_maj([I,III,V,VII]) :- ter_maj(I,III),ter_min(III,V),ter_maj(V,VII).
-sept_dis([I,III,V,VII]) :- ter_min(I,III),ter_min(III,V),ter_min(V,VII).
-sept_sem([I,III,V,VII]) :- ter_min(I,III),ter_min(III,V),ter_maj(V,VII).
-
-cuatriada(X) :- sept_min(X);sept_maj(X);sept_dis(X);sept_sem(X).
-
-% 4.3 Inversiones
-
-inv_6([I,III,V],[III,V,I]) 	:- triada([I,III,V]).
-inv_64([I,III,V],[V,I,III]) :- triada([I,III,V]).
-
-inv_65([I,III,V,VII],[III,V,VII,I]) :- cuatriada([I,III,V,VII]).
-inv_43([I,III,V,VII],[V,VII,I,III]) :- cuatriada([I,III,V,VII]).
-inv_2([I,III,V,VII],[VII,I,III,V])	:- cuatriada([I,III,V,VII]).
-
+	sept_min([I,III,V,VII]) :- ter_maj(I,III),ter_min(III,V),ter_min(V,VII).
+	sept_maj([I,III,V,VII]) :- ter_maj(I,III),ter_min(III,V),ter_maj(V,VII).
+	sept_dis([I,III,V,VII]) :- ter_min(I,III),ter_min(III,V),ter_min(V,VII).
+	sept_sem([I,III,V,VII]) :- ter_min(I,III),ter_min(III,V),ter_maj(V,VII).
+	
+	% 4.3 Inversiones
+	
+	inv_6([I,III,V],[III,V,I]).
+	inv_64([I,III,V],[V,I,III]).
+	
+	inv_65([I,III,V,VII],[III,V,VII,I]).
+	inv_43([I,III,V,VII],[V,VII,I,III]).
+	inv_2([I,III,V,VII],[VII,I,III,V]).
+	
 % 5. Funciones tonales
 
-% 5.1 Básicas
+	% 5.1 Básicas
 
-ton_maj(I,[I,III,V]) 			:- perf_maj([I,III,V]).
-ton_min(I,[I,III,V]) 			:- perf_min([I,III,V]).
-rel_maj(I,[III,V,VII]) 			:- perf_maj([III,V,VII]),esc_min(I,[I,_,III|_]),!.
-ton_III(I,[III,V,VII]) 			:- perf_min([III,V,VII]),esc_maj(I,[I,_,III|_]),!.
-dom(I,[V,VII,II]) 				:- perf_maj([V,VII,II]),qui_jus(I,V),!.
-sept_dom(I,[V,VII,II,IV]) 		:- sept_min([V,VII,II,IV]),qui_jus(I,V),!.
-sub_IV_maj(I,[IV,VI,I]) 		:- perf_maj([IV,VI,I]),!.
-sub_II_maj(I,[II,IV,VI]) 		:- perf_min([II,IV,VI]),esc_maj(I,[I,II|_]),!.
-sub_VI_maj(I,[VI,I,III]) 		:- perf_min([VI,I,III]),!.
-dom_VII_maj(I,[VII,II,IV]) 		:- quin_dis([VII,II,IV]),esc_maj(I,[I,II|_]),!.
-sept_dis_VII(I,[VII,II,IV,VI])	:- sept_dis([VII,II,IV,VI]),esc_maj(I,[I,II|_]),!.
-sept_sen_VII(I,[VII,II,IV,VI])	:- sept_sem([VII,II,IV,VI]),esc_maj(I,[I,II|_]),!.
+	ton_maj(I,[I,III,V]) 			:- perf_maj([I,III,V]).
+	ton_min(I,[I,III,V]) 			:- perf_min([I,III,V]).
+	rel_maj(I,[III,V,VII]) 			:- perf_maj([III,V,VII]),esc_min(I,[I,_,III|_]).
+	ton_III(I,[III,V,VII]) 			:- perf_min([III,V,VII]),esc_maj(I,[I,_,III|_]).
+	dom(I,[V,VII,II]) 				:- perf_maj([V,VII,II]),esc_maj(I,[I,II|_]).
+	sept_dom(I,[V,VII,II,IV]) 		:- sept_min([V,VII,II,IV]),qui_jus(I,V).
+	sub_IV_maj(I,[IV,VI,I]) 		:- perf_maj([IV,VI,I]).
+	sub_II_maj(I,[II,IV,VI]) 		:- perf_min([II,IV,VI]),esc_maj(I,[I,II|_]).
+	sub_VI_maj(I,[VI,I,III]) 		:- perf_min([VI,I,III]).
+	dom_VII_maj(I,[VII,II,IV]) 		:- quin_dis([VII,II,IV]),esc_maj(I,[I,II|_]).
+	sept_dis_VII(I,[VII,II,IV,VI])	:- sept_dis([VII,II,IV,VI]),esc_maj(I,[I,II|_]).
+	sept_sen_VII(I,[VII,II,IV,VI])	:- sept_sem([VII,II,IV,VI]),esc_maj(I,[I,II|_]).
 
-% 5.2 Dominantes y subdominantes secundarias
+	% 5.2 Dominantes y subdominantes secundarias
 
-dom_dom(I,X) 		:- qui_jus(I,V),dom(V,X),!.
-dom_dom_sept(I,X)	:- qui_jus(I,V),sept_dom(V,X),!.
-sub_IV_dom(I,X)		:- qui_jus(I,V),sub_IV_maj(V,X),!.
-
-dom_sub_sept(I,X)	:- cua_jus(I,IV),sept_dom(IV,X),!.
+	dom_dom(I,X) 		:- qui_jus(I,V),dom(V,X).
+	dom_dom_sept(I,X)	:- qui_jus(I,V),sept_dom(V,X).
+	sub_IV_dom(I,X)		:- qui_jus(I,V),sub_IV_maj(V,X).
+	
+	dom_sub_sept(I,X)	:- cua_jus(I,IV),sept_dom(IV,X).
 
 % 6. Semifrases cadenciales 
 
-% 6.1 Procesos cadenciales que reafirman la tonalidad
+	% 6.1 Procesos cadenciales que reafirman la tonalidad
 
-cad_perf(I,([T,S64,D65,T],["T","S64","D65","T"])) 				:- ton_maj(I,T),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65),!.
-cad_647(I,([T,S64,D64,D7,T],["T","S64","D64","D7","T"])) 		:- ton_maj(I,T),sub_IV_maj(I,S),inv_64(S,S64),inv_64(T,D64),sept_dom(I,D7),!.
-cad_SIIDT(I,([T,SII,D65,T],["T","SII","D65","T"])) 				:- ton_maj(I,T),sub_II_maj(I,SII),sept_dom(I,D7),inv_65(D7,D65),!.
-cad_SIISDT(I,([T,SII,S64,D65,T],["T","SII","S64","D65","T"])) 	:- ton_maj(I,T),sub_II_maj(I,SII),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65),!.
-cad_SVISDT(I,([T,SVI6,S64,D65,T],["T","SVI6","S64","D65","T"]))	:- ton_maj(I,T),sub_VI_maj(I,SVI),inv_6(SVI,SVI6),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65),!.
-
-	% 6.1.1 Elección aleatoria de frases conclusivas
+	cad_perf(I,([T,S64,D65,T],["T","S64","D65","T"])) 				:- ton_maj(I,T),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65).
+	cad_647(I,([T,S64,D64,D7,T],["T","S64","D64","D7","T"])) 		:- ton_maj(I,T),sub_IV_maj(I,S),inv_64(S,S64),inv_64(T,D64),sept_dom(I,D7).
+	cad_SIIDT(I,([T,SII,D65,T],["T","SII","D65","T"])) 				:- ton_maj(I,T),sub_II_maj(I,SII),sept_dom(I,D7),inv_65(D7,D65).
+	cad_SIISDT(I,([T,SII,S64,D65,T],["T","SII","S64","D65","T"])) 	:- ton_maj(I,T),sub_II_maj(I,SII),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65).
+	cad_SVISDT(I,([T,SVI6,S64,D65,T],["T","SVI6","S64","D65","T"]))	:- ton_maj(I,T),sub_VI_maj(I,SVI),inv_6(SVI,SVI6),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65).
 	
-	semifrase_conclusiva(I,(Acordes,Cifrado))	:- random_between(1,5,X),semifrase_conclusiva(I,(Acordes,Cifrado),X),!.
+		% 6.1.1 Elección aleatoria de frases conclusivas
+		
+		semifrase_conclusiva(I,(Acordes,Cifrado))	:- random_between(1,5,X),semifrase_conclusiva(I,(Acordes,Cifrado),X).
+		
+		semifrase_conclusiva(I,(Acordes,Cifrado),1)	:- cad_perf(I,(Acordes,Cifrado)).
+		semifrase_conclusiva(I,(Acordes,Cifrado),2)	:- cad_647(I,(Acordes,Cifrado)).
+		semifrase_conclusiva(I,(Acordes,Cifrado),3)	:- cad_SIIDT(I,(Acordes,Cifrado)).
+		semifrase_conclusiva(I,(Acordes,Cifrado),4)	:- cad_SIISDT(I,(Acordes,Cifrado)).
+		semifrase_conclusiva(I,(Acordes,Cifrado),5)	:- cad_SVISDT(I,(Acordes,Cifrado)).
+
+	% 6.2 Semi-conclusivas y no conclusivas que comienzan en subdominante
 	
-	semifrase_conclusiva(I,(Acordes,Cifrado),1)	:- cad_perf(I,(Acordes,Cifrado)),!.
-	semifrase_conclusiva(I,(Acordes,Cifrado),2)	:- cad_647(I,(Acordes,Cifrado)),!.
-	semifrase_conclusiva(I,(Acordes,Cifrado),3)	:- cad_SIIDT(I,(Acordes,Cifrado)),!.
-	semifrase_conclusiva(I,(Acordes,Cifrado),4)	:- cad_SIISDT(I,(Acordes,Cifrado)),!.
-	semifrase_conclusiva(I,(Acordes,Cifrado),5)	:- cad_SVISDT(I,(Acordes,Cifrado)),!.
-
-% 6.3 Semi-conclusivas y no conclusivas que comienzan en subdominante
-
-cad_plag_III(I,([S64,III,S,T],["S64","TIII","S","T"]))		:- ton_maj(I,T),ton_III(I,III),sub_IV_maj(I,S),inv_64(S,S64),!.
-cad_plag_VI(I,([SII,SVI6,S64,T],["SII","SVI6","S64","T"]))	:- sub_II_maj(I,SII),ton_maj(I,T),sub_VI_maj(I,SVI),inv_6(SVI,SVI6),sub_IV_maj(I,S),inv_64(S,S64),!.
-cad_semicad(I,([D6,III64,S6,D6],["D6","TIII64","S6","D6"]))	:- ton_III(I,III),inv_64(III,III64),sub_IV_maj(I,S),inv_6(S,S6),dom(I,D),inv_6(D,D6),!.
-cad_rota(I,([SII,S64,D65,SVI6],["SII","S64","D65","SVI6"]))	:- sub_II_maj(I,SII),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65),sub_VI_maj(I,SVI),inv_6(SVI,SVI6),!.
-
-	% 6.1.1 Elección aleatoria de frases no conclusivas
-
-	semifrase_no_conclusiva(I,(Acordes,Cifrado)) 	:- random_between(1,4,X),semifrase_no_conclusiva(I,(Acordes,Cifrado),X),!.
-
-	semifrase_no_conclusiva(I,(Acordes,Cifrado),1)	:- cad_plag_III(I,(Acordes,Cifrado)),!.
-	semifrase_no_conclusiva(I,(Acordes,Cifrado),2)	:- cad_plag_VI(I,(Acordes,Cifrado)),!.
-	semifrase_no_conclusiva(I,(Acordes,Cifrado),3)	:- cad_semicad(I,(Acordes,Cifrado)),!.
-	semifrase_no_conclusiva(I,(Acordes,Cifrado),4)	:- cad_rota(I,(Acordes,Cifrado)),!.		
+	cad_plag_III(I,([S64,III,S,T],["S64","TIII","S","T"]))		:- ton_maj(I,T),ton_III(I,III),sub_IV_maj(I,S),inv_64(S,S64).
+	cad_plag_VI(I,([SII,SVI6,S64,T],["SII","SVI6","S64","T"]))	:- sub_II_maj(I,SII),ton_maj(I,T),sub_VI_maj(I,SVI),inv_6(SVI,SVI6),sub_IV_maj(I,S),inv_64(S,S64).
+	cad_semicad(I,([D6,III64,S6,D6],["D6","TIII64","S6","D6"]))	:- ton_III(I,III),inv_64(III,III64),sub_IV_maj(I,S),inv_6(S,S6),dom(I,D),inv_6(D,D6).
+	cad_rota(I,([SII,S64,D65,SVI6],["SII","S64","D65","TVI6"]))	:- sub_II_maj(I,SII),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65),sub_VI_maj(I,SVI),inv_6(SVI,SVI6).
 	
-% 6.4 Con enfatizaciones a otros tonos
-cad_DD(I,([T,SII64,DD43,D6],["T","SII64","D/D43","D6"]))		:- ton_maj(I,T),sub_II_maj(I,SII),inv_64(SII,SII64),dom_dom_sept(I,DD),inv_43(DD,DD43),dom(I,D),inv_6(D,D6),!.
-cad_DS(I,([T,III64,DS2,S6],["T","III64","D/S2","S6"]))			:- ton_maj(I,T),ton_III(I,III),inv_64(III,III64),dom_sub_sept(I,DS),inv_2(DS,DS2),sub_IV_maj(I,S),inv_6(S,S6),!.
-cad_DS_DD(I,([T,DS,S64,DD,D64],["T","D/S","S64","D/D","D64"])) 	:- ton_maj(I,T),dom_sub_sept(I,DS),sub_IV_maj(I,S),inv_64(S,S64),dom_dom_sept(I,DD),dom(I,D),inv_64(D,D64),!.
-cad_rel_min(I,([T,D6,VIIdis,VI6],["T","D6","VIIdis","VI6"]))	:- ton_maj(I,T),dom(I,D),inv_6(D,D6),sept_dis_VII(I,VIIdis),sub_VI_maj(I,VI),inv_6(VI,VI6),!.
-
-	% 6.1.1 Elección aleatoria de frases con enfatizaciones
-
-	semifrase_modulante(I,(Acordes,Cifrado))	:- random_between(1,4,X),semifrase_modulante(I,(Acordes,Cifrado),X),!.
+		% 6.2.1 Elección aleatoria de frases no conclusivas
 	
-	semifrase_modulante(I,(Acordes,Cifrado),1)	:- cad_DD(I,(Acordes,Cifrado)).
-	semifrase_modulante(I,(Acordes,Cifrado),2)	:- cad_DS(I,(Acordes,Cifrado)).
-	semifrase_modulante(I,(Acordes,Cifrado),3)	:- cad_DS_DD(I,(Acordes,Cifrado)).
-	semifrase_modulante(I,(Acordes,Cifrado),4)	:- cad_rel_min(I,(Acordes,Cifrado)).
+		semifrase_no_conclusiva(I,(Acordes,Cifrado)) 	:- random_between(1,4,X),semifrase_no_conclusiva(I,(Acordes,Cifrado),X).
 
-% 6.5 Retoman la tonalidad comenzando en la subdominante
-
-cad_sub_perf(I,([S64,T,D65,T],["S64","T","D65","T"])) 				:- ton_maj(I,T),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65),!.
-cad_sub_647(I,([S64,D64,T,D43,T],["S64","T","D64","D43","T"])) 		:- ton_maj(I,T),sub_IV_maj(I,S),inv_64(S,S64),inv_64(T,D64),sept_dom(I,D7),inv_43(D7,D43),!.
-cad_sub_SIIDT(I,([SII,T,D65,T],["SII","T","D65","T"])) 				:- ton_maj(I,T),sub_II_maj(I,SII),sept_dom(I,D7),inv_65(D7,D65),!.
-cad_sub_SIISDT(I,([SII,T,S64,D65,T],["SII","T","S64","D65","T"])) 	:- ton_maj(I,T),sub_II_maj(I,SII),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65),!.
-cad_sub_SVISDT(I,([SVI6,T,S64,D65,T],["SVI6","T","S64","D65","T"]))	:- ton_maj(I,T),sub_VI_maj(I,SVI),inv_6(SVI,SVI6),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65),!.
-
-	% 6.1.1 Elección aleatoria de frases conclusivas
+		semifrase_no_conclusiva(I,(Acordes,Cifrado),1)	:- cad_plag_III(I,(Acordes,Cifrado)).
+		semifrase_no_conclusiva(I,(Acordes,Cifrado),2)	:- cad_plag_VI(I,(Acordes,Cifrado)).
+		semifrase_no_conclusiva(I,(Acordes,Cifrado),3)	:- cad_semicad(I,(Acordes,Cifrado)).
+		semifrase_no_conclusiva(I,(Acordes,Cifrado),4)	:- cad_rota(I,(Acordes,Cifrado)).		
+		
+	% 6.3 Con enfatizaciones a otros tonos
+	cad_DD(I,([T,SII64,DD43,D6],["T","SII64","D/D43","D6"]))		:- ton_maj(I,T),sub_II_maj(I,SII),inv_64(SII,SII64),dom_dom_sept(I,DD),inv_43(DD,DD43),dom(I,D),inv_6(D,D6).
+	cad_DS(I,([T,III64,DS2,S6],["T","III64","D/S2","S6"]))			:- ton_maj(I,T),ton_III(I,III),inv_64(III,III64),dom_sub_sept(I,DS),inv_2(DS,DS2),sub_IV_maj(I,S),inv_6(S,S6).
+	cad_DS_DD(I,([T,DS,S64,DD,D64],["T","D/S","S64","D/D","D64"])) 	:- ton_maj(I,T),dom_sub_sept(I,DS),sub_IV_maj(I,S),inv_64(S,S64),dom_dom_sept(I,DD),dom(I,D),inv_64(D,D64).
+	cad_rel_min(I,([T,D6,VIIdis,VI6],["T","D6","VIIdis","VI6"]))	:- ton_maj(I,T),dom(I,D),inv_6(D,D6),sept_dis_VII(I,VIIdis),sub_VI_maj(I,VI),inv_6(VI,VI6).
 	
-	semifrase_conclusiva_sub(I,(Acordes,Cifrado)) 	:- random_between(1,5,X),semifrase_conclusiva_sub(I,(Acordes,Cifrado),X),!.
+		% 6.3.1 Elección aleatoria de frases con enfatizaciones
 	
-	semifrase_conclusiva_sub(I,(Acordes,Cifrado),1)	:- cad_sub_perf(I,(Acordes,Cifrado)),!.
-	semifrase_conclusiva_sub(I,(Acordes,Cifrado),2)	:- cad_sub_647(I,(Acordes,Cifrado)),!.
-	semifrase_conclusiva_sub(I,(Acordes,Cifrado),3)	:- cad_sub_SIIDT(I,(Acordes,Cifrado)),!.
-	semifrase_conclusiva_sub(I,(Acordes,Cifrado),4)	:- cad_sub_SIISDT(I,(Acordes,Cifrado)),!.
-	semifrase_conclusiva_sub(I,(Acordes,Cifrado),5)	:- cad_sub_SVISDT(I,(Acordes,Cifrado)),!.
+		semifrase_modulante(I,(Acordes,Cifrado))	:- random_between(1,4,X),semifrase_modulante(I,(Acordes,Cifrado),X).
+		
+		semifrase_modulante(I,(Acordes,Cifrado),1)	:- cad_DD(I,(Acordes,Cifrado)).
+		semifrase_modulante(I,(Acordes,Cifrado),2)	:- cad_DS(I,(Acordes,Cifrado)).
+		semifrase_modulante(I,(Acordes,Cifrado),3)	:- cad_DS_DD(I,(Acordes,Cifrado)).
+		semifrase_modulante(I,(Acordes,Cifrado),4)	:- cad_rel_min(I,(Acordes,Cifrado)).
 	
+	% 6.4 Retoman la tonalidad comenzando en la subdominante
+	
+	cad_sub_perf(I,([S64,T,D65,T],["S64","T","D65","T"])) 				:- ton_maj(I,T),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65).
+	cad_sub_647(I,([S64,D64,T,D43,T],["S64","T","D64","D43","T"])) 		:- ton_maj(I,T),sub_IV_maj(I,S),inv_64(S,S64),inv_64(T,D64),sept_dom(I,D7),inv_43(D7,D43).
+	cad_sub_SIIDT(I,([SII,T,D65,T],["SII","T","D65","T"])) 				:- ton_maj(I,T),sub_II_maj(I,SII),sept_dom(I,D7),inv_65(D7,D65).
+	cad_sub_SIISDT(I,([SII,T,S64,D65,T],["SII","T","S64","D65","T"])) 	:- ton_maj(I,T),sub_II_maj(I,SII),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65).
+	cad_sub_SVISDT(I,([SVI6,T,S64,D65,T],["SVI6","T","S64","D65","T"]))	:- ton_maj(I,T),sub_VI_maj(I,SVI),inv_6(SVI,SVI6),sub_IV_maj(I,S),inv_64(S,S64),sept_dom(I,D7),inv_65(D7,D65).
+	
+		% 6.4.1 Elección aleatoria de frases conclusivas
+		
+		semifrase_conclusiva_sub(I,(Acordes,Cifrado)) 	:- random_between(1,5,X),semifrase_conclusiva_sub(I,(Acordes,Cifrado),X).
+		
+		semifrase_conclusiva_sub(I,(Acordes,Cifrado),1)	:- cad_sub_perf(I,(Acordes,Cifrado)).
+		semifrase_conclusiva_sub(I,(Acordes,Cifrado),2)	:- cad_sub_647(I,(Acordes,Cifrado)).
+		semifrase_conclusiva_sub(I,(Acordes,Cifrado),3)	:- cad_sub_SIIDT(I,(Acordes,Cifrado)).
+		semifrase_conclusiva_sub(I,(Acordes,Cifrado),4)	:- cad_sub_SIISDT(I,(Acordes,Cifrado)).
+		semifrase_conclusiva_sub(I,(Acordes,Cifrado),5)	:- cad_sub_SVISDT(I,(Acordes,Cifrado)).
+		
 % 7. Secuencia completa para un modo de coral standard
 
 coral(I,(Acordes,Cifrado))	:- coral_std(I,(Acordes,Cifrado),[1,2,3,4]),!.
