@@ -229,16 +229,16 @@ esc_min(I,[I,II,III,IV,V,VI,VII]) :- seg_maj(I,II),seg_min(II,III),seg_maj(III,I
 
 	ton_maj(I,[I,III,V]) 			:- perf_maj([I,III,V]).
 	ton_min(I,[I,III,V]) 			:- perf_min([I,III,V]).
-	rel_maj(I,[III,V,VII]) 			:- perf_maj([III,V,VII]),esc_min(I,[I,_,III|_]).
-	ton_III(I,[III,V,VII]) 			:- perf_min([III,V,VII]),esc_maj(I,[I,_,III|_]).
-	dom(I,[V,VII,II]) 				:- perf_maj([V,VII,II]),esc_maj(I,[I,II|_]).
-	sept_dom(I,[V,VII,II,IV]) 		:- sept_min([V,VII,II,IV]),qui_jus(I,V).
+	rel_maj(I,[III,V,VII]) 			:- ter_min(I,III),perf_maj([III,V,VII]).
+	ton_III(I,[III,V,VII]) 			:- ter_maj(I,III),perf_min([III,V,VII]).
+	dom(I,[V,VII,II]) 				:- seg_maj(I,II),perf_maj([V,VII,II]).
+	sept_dom(I,[V,VII,II,IV]) 		:- qui_jus(I,V),sept_min([V,VII,II,IV]).
 	sub_IV_maj(I,[IV,VI,I]) 		:- perf_maj([IV,VI,I]).
-	sub_II_maj(I,[II,IV,VI]) 		:- perf_min([II,IV,VI]),esc_maj(I,[I,II|_]).
+	sub_II_maj(I,[II,IV,VI]) 		:- seg_maj(I,II),perf_min([II,IV,VI]).
 	sub_VI_maj(I,[VI,I,III]) 		:- perf_min([VI,I,III]).
-	dom_VII_maj(I,[VII,II,IV]) 		:- quin_dis([VII,II,IV]),esc_maj(I,[I,II|_]).
-	sept_dis_VII(I,[VII,II,IV,VI])	:- sept_dis([VII,II,IV,VI]),esc_maj(I,[I,II|_]).
-	sept_sen_VII(I,[VII,II,IV,VI])	:- sept_sem([VII,II,IV,VI]),esc_maj(I,[I,II|_]).
+	dom_VII_maj(I,[VII,II,IV]) 		:- seg_maj(I,II),quin_dis([VII,II,IV]).
+	sept_dis_VII(I,[VII,II,IV,VI])	:- seg_maj(I,II),sept_dis([VII,II,IV,VI]).
+	sept_sen_VII(I,[VII,II,IV,VI])	:- seg_maj(I,II),sept_sem([VII,II,IV,VI]).
 
 	% 5.2 Dominantes y subdominantes secundarias
 
