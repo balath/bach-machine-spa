@@ -11,7 +11,7 @@ function loadPrologFile(){
 
 function loadPecPDF(){
 	document.getElementById('home-msg').style.display = "none";
-	document.getElementById('cont').innerHTML = '<embed src="files/memoria.pdf" type="text/pdf" width="90%" height="1000px"/>';
+	document.getElementById('cont').innerHTML = '<embed src="files/memoria.pdf" type="application/pdf" width="90%" height="1000px"/>';
 }	
 
 //Management of Prolog harmony generation
