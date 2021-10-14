@@ -10,7 +10,8 @@ function loadPrologFile(){
 }
 
 function loadPecPDF(){
-	alert('El archivo de la memoria está en construcción');
+	document.getElementById('home-msg').style.display = "none";
+	document.getElementById('cont').innerHTML = '<embed src="files/memoria.pdf" type="text/pdf" width="90%" height="1000px"/>';
 }	
 
 //Management of Prolog harmony generation
