@@ -9,15 +9,6 @@ function loadPrologFile(){
 	document.getElementById('cont').innerHTML = '<embed src="files/bach-machine.html" type="text/html" width="90%" height="1000px"/>'; 	
 }
 
-function loadPecPDF(){
-	document.getElementById('home-msg').style.display = "none";
-	document.getElementById('cont').innerHTML = `
-		<embed src="files/memoria.pdf" type="application/pdf" width="90%" height="1000px">
-        <p>Este navegador no soporta PDF embebidos, sin embargo, puedes descargar el archivo <a href="https://github.com/balath/balath.github.io/raw/master/files/memoria.pdf">aquí</a>.</p>
-		</embed>
-	`;
-}	
-
 //Management of Prolog harmony generation
 
 const formatNote = note => note.replaceAll('_s','♯').replaceAll('_b','♭');	
