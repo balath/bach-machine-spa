@@ -1,4 +1,4 @@
-﻿
+<!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8"/>
@@ -28,23 +28,30 @@
 			<br>
 			<form id="tono" action="prolog.js">
 			  <br><br>
-			  <label for="tonos">Tono del Coral:</label> <select class="select" id="tonos">
-				<option aria-label="do" value= "do" selected>Do</option>
-				<option aria-label="do sostenido"value= "do_s" >Do♯</option>
-				<option aria-label="re bemol "value= "re_b">Re♭</option>
-				<option aria-label="re" value= "re">Re</option>
-				<option aria-label="mi bemol" value= "mi_b">Mi♭</option> 
-				<option aria-label="mi" value= "mi">Mi</option>
-				<option aria-label="fa" value= "fa">Fa</option>
-				<option aria-label="fa sostenido" value= "fa_s">Fa♯</option>
-				<option aria-label="sol bemol" value= "sol_b">Sol♭</option>
-				<option aria-label="sol" value= "sol">Sol</option>
-				<option aria-label="la bemol" value= "la_b">La♭</option>
-				<option aria-label="la" value= "la">La</option>
-				<option aria-label="si bemol" value= "si_b">Si♭</option>
-				<option aria-label="si" value= "si">Si</option>
-				<option aria-label="do bemol" value= "do_b">Do♭</option>
+			  <label for="tonos">Tono del Coral:</label> 
+			  <select class="select" id="tonos">
+				<option aria-label="do" value="c" selected>Do</option>
+				<option aria-label="do sostenido" value="cis">Do♯</option>
+				<option aria-label="re bemol" value="des">Re♭</option>
+				<option aria-label="re" value="d">Re</option>
+				<option aria-label="mi bemol" value="ees">Mi♭</option> 
+				<option aria-label="mi" value="e">Mi</option>
+				<option aria-label="fa" value="f">Fa</option>
+				<option aria-label="fa sostenido" value="fis">Fa♯</option>
+				<option aria-label="sol bemol" value="ges">Sol♭</option>
+				<option aria-label="sol" value="g">Sol</option>
+				<option aria-label="la bemol" value="aes">La♭</option>
+				<option aria-label="la" value="a">La</option>
+				<option aria-label="si bemol" value="bis">Si♭</option>
+				<option aria-label="si" value="b">Si</option>
 			  </select>
+			  <br><br>
+			  <label for="modo">Modo:</label> 
+			  <select class="select" id="modo">
+				<option value="major" selected>Mayor</option>
+				<option value="minor">Menor</option>
+			  </select>
+			  <br><br>
 			  <input class="select" type="button" value="Generar" onclick="generate()">
 			</form>
 			<br>
@@ -57,13 +64,41 @@
 	<script src="scripts/tau-prolog.js"></script>
 	<script src="scripts/prologString.js"></script>
 	<script src="scripts/main.js"></script>
+    <script>
+        function generate() {
+            const key = document.getElementById('tonos').value;
+            const mode = document.getElementById('modo').value;
+            const url = ` https://bach-machine-02a43fd154c6.herokuapp.com/choral/${key}/${mode}`;
+
+            fetch(url, {
+                method: 'GET',
+            })
+            .then(response => response.json())
+            .then(data => {
+                const pdfId = data.pdf;
+                const midiId = data.midi;
+
+                // Construir URLs
+                const pdfUrl = ` https://bach-machine-02a43fd154c6.herokuapp.com/pdf/${pdfId}`;
+                const midiUrl = ` https://bach-machine-02a43fd154c6.herokuapp.com/midi/${midiId}`;
+
+                // Crear elementos para mostrar el PDF y descargar el MIDI
+                const pdfIframe = `<iframe src="${pdfUrl}" width="100%" height="600px"></iframe>`;
+                const midiLink = `<a href="${midiUrl}" download="choral.mid">Descargar archivo MIDI</a>`;
+
+                // Mostrar resultados en el contenedor
+                document.getElementById('cont').innerHTML = `<div>${pdfIframe}</div><div>${midiLink}</div>`;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 	<br><br>
 </body>
 
 <footer>
   <a href="mailto:sergio-flor@outlook.es"><img alt="Mail" src="files/mail32.png"></a>
   <a href="http://tau-prolog.org/"><img alt="Tau-Prolog website" src="files/tauprolog32.png"></a>
-  <a href="https://twitter.com/balath83"><img alt="Mail" src="files/twitter32.png"></a>  
+  <a href="https://twitter.com/balath83"><img alt="Twitter" src="files/twitter32.png"></a>  
 </footer>
 
 </html>
