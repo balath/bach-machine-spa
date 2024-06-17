@@ -89,7 +89,9 @@
                 // Mostrar resultados en el contenedor
                 document.getElementById('cont').innerHTML = `<div>${pdfIframe}</div><div>${midiLink}</div>`;
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+		    document.getElementById('cont').innerHTML = `<div style="color: red;">${error.message}</div>`;
+	    });
         }
     </script>
 	<br><br>
