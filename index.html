@@ -68,7 +68,7 @@
         function generate() {
             const key = document.getElementById('tonos').value;
             const mode = document.getElementById('modo').value;
-            const url = ` https://bach-machine-02a43fd154c6.herokuapp.com/choral/${key}/${mode}`;
+            const url = `https://71f0-84-122-116-223.ngrok-free.app/choral/${key}/${mode}`;
 
             fetch(url, {
                 method: 'GET',
@@ -79,8 +79,8 @@
                 const midiId = data.midi;
 
                 // Construir URLs
-                const pdfUrl = ` https://bach-machine-02a43fd154c6.herokuapp.com/pdf/${pdfId}`;
-                const midiUrl = ` https://bach-machine-02a43fd154c6.herokuapp.com/midi/${midiId}`;
+                const pdfUrl = `https://71f0-84-122-116-223.ngrok-free.app/pdf/${pdfId}`;
+                const midiUrl = `https://71f0-84-122-116-223.ngrok-free.app/midi/${midiId}`;
 
                 // Crear elementos para mostrar el PDF y descargar el MIDI
                 const pdfIframe = `<iframe src="${pdfUrl}" width="100%" height="600px"></iframe>`;
