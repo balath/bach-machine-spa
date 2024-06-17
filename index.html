@@ -74,6 +74,8 @@
             fetch(url)
             .then(response => response.json())
             .then(data => {
+		    console.log("Datos de la respuesta ")
+		    console.log(data);
                 const pdfId = data.pdf;
                 const midiId = data.midi;
 
