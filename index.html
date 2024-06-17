@@ -69,6 +69,7 @@
             const key = document.getElementById('tonos').value;
             const mode = document.getElementById('modo').value;
             const url = `https://71f0-84-122-116-223.ngrok-free.app/choral/${key}/${mode}`;
+		console.log(url)	
 
             fetch(url, {
                 method: 'GET',
