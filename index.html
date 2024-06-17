@@ -71,9 +71,7 @@
             const url = `https://71f0-84-122-116-223.ngrok-free.app/choral/${key}/${mode}`;
 		console.log(url)	
 
-            fetch(url, {
-                method: 'GET',
-            })
+            fetch(url)
             .then(response => response.json())
             .then(data => {
                 const pdfId = data.pdf;
