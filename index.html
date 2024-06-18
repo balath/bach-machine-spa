@@ -5,7 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>Bach-machine</title>
 	<link href="styles/style.css" rel="stylesheet" type="text/css">
-	
 </head>
 
 <body>
@@ -89,15 +88,19 @@
                 const pdfUrl = `${host}/pdf/${pdfId}`;
                 const midiUrl = `${host}/midi/${midiId}`;
 
+		// Crear elementos para descargar el MIDI y mostrar el PDF
+		const midiLink = `<div class="midi-button">
+		                    <a href="${midiUrl}" download="choral.mid" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Descargar archivo MIDI</a>
+		                  </div>`;
+		const pdfIframe = `<iframe src="${pdfUrl}" class="pdf-iframe"></iframe>`;
 		
-			
-		// const midiLink = `<div class="midi-button">
-		//                     <a href="${midiUrl}" download="choral.mid" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Descargar archivo MIDI</a>
-		//                   </div>`;
-		const pdfIframe = `<iframe src="${pdfUrl}" class="pdf-iframe" style="width: 100%; max-width: 1000px; height: 80vh; border: none;"></iframe>`;
-
 		// Mostrar resultados en el contenedor
-		document.getElementById('cont').innerHTML = `${pdfIframe}`;
+		document.getElementById('cont').innerHTML = `${midiLink}${pdfIframe}`;
+
+
+		} catch (error) {
+                    throw new Error(`Error parsing JSON: ${error.message}`);
+                }
             })
             .catch(error => {
 		    document.getElementById('cont').innerHTML = `<div style="color: red;">${error.message}</div>`;
