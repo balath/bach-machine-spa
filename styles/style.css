@@ -52,56 +52,11 @@ h1,h2 {
     padding: 20px; /* Añade un poco de espacio alrededor */
 }
 
-.midi-button {
-    margin-bottom: 20px; /* Añade espacio debajo del botón */
-}
-
 .pdf-iframe {
     width: 100%; /* Asegura que el iframe ocupe todo el ancho del contenedor */
     max-width: 1000px; /* Limita el ancho máximo */
     height: 80vh; /* Ajusta la altura al 80% de la vista */
     border: none; /* Elimina el borde del iframe */
-}
-
-.midi-player {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.midi-button {
-    margin-bottom: 20px;
-}
-
-.pdf-iframe {
-    width: 100%;
-    max-width: 1000px;
-    height: 80vh;
-    border: none;
-}
-
-#chords-table {
-  border-collapse: collapse;
-  width: 300px;
-  border-spacing: 12px;
-}
-
-#chords-table th {
-  border-bottom: 1px solid var(--hard-contrast);
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: var(--hard-contrast);
-  color: white;
-}
-
-#chords-table td {
-  border-bottom: 1px solid var(--hard-contrast);
-  background-color: var(--soft-contrast);
-  padding: 8px;
-}
-
-#chords-table tr td:nth-child(2)  {
-    text-align: center;
 }
 
 .button {
@@ -137,7 +92,7 @@ h1,h2 {
 }
 
 .select:hover {
-  opacity: 1;
+  opacity: 2;
 }
 
 footer {
