@@ -27,7 +27,6 @@
 	
 		<div id="home-msg" align="center">
 			<br>
-			<form id="tono" action="prolog.js">
 			  <br><br>
 			  <label for="tonos">Tono del Coral:</label> 
 			  <select class="select" id="tonos">
@@ -54,13 +53,10 @@
 			  </select>
 			  <br><br>
 			  <input class="select" type="button" value="Generar" onclick="generate()">
-			</form>
 			<br>
 		</div>
 		<div class="flex-content" id="cont"></div>
 	</div>
-
-	<script src="scripts/main.js"></script>
     <script>
         function generate() {
 		const host = `https://4fde15ea018b373cb55531f4e2cb4a6e.serveo.net`
