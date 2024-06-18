@@ -56,8 +56,8 @@
 			</form>
 			<br>
 		</div>
-		
-		<div class="flex-content" id="cont"></div>
+		<div class="flex-content" id="cont1"></div>
+		<div class="flex-content" id="cont2"></div>
 
 	</div>
 
@@ -99,7 +99,8 @@
 		                  </div>`;
 		
 		// Mostrar resultados en el contenedor
-		document.getElementById('cont').innerHTML = `${midiLink}${pdfIframe}`;
+		document.getElementById('cont1').innerHTML = `${midiLink}`;
+		document.getElementById('cont2').innerHTML = `${pdfIframe}`;
 
 		} catch (error) {
                     throw new Error(`Error parsing JSON: ${error.message}`);
