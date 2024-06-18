@@ -91,13 +91,15 @@
                 const midiUrl = `${host}/midi/${midiId}`;
 
                // Crear elementos para descargar el MIDI y mostrar el PDF
-		const midiLink = `<div style="margin-bottom: 10px;">
-                    <a href="${midiUrl}" download="choral.mid" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Descargar archivo MIDI</a>
-                  </div>`;
-		const pdfIframe = `<iframe src="${pdfUrl}" style="width: 100%; height: 80vh; border: none;"></iframe>`;
-
-// Mostrar resultados en el contenedor
-		document.getElementById('cont').innerHTML = `<div>${midiLink}</div><div>${pdfIframe}</div>`;
+		const midiLink = `<div style="text-align: center; margin-bottom: 20px;">
+		                    <a href="${midiUrl}" download="choral.mid" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Descargar archivo MIDI</a>
+		                  </div>`;
+		const pdfIframe = `<div style="text-align: center;">
+		                    <iframe src="${pdfUrl}" style="width: 80%; height: 80vh; border: none;"></iframe>
+		                  </div>`;
+		
+		// Mostrar resultados en el contenedor
+		document.getElementById('cont').innerHTML = `${midiLink}${pdfIframe}`;
 
 		} catch (error) {
                     throw new Error(`Error parsing JSON: ${error.message}`);
