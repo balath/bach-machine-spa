@@ -110,6 +110,10 @@
 		    document.getElementById('cont').innerHTML = `<div style="color: red;">${error.message}</div>`;
 	    });
         }
+
+	function playMIDI(url) {
+	    MIDIjs.play(url);
+	}
     </script>
 	<br><br>
 </body>
