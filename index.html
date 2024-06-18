@@ -53,18 +53,18 @@
 			  <input class="select" type="button" value="Generar" onclick="generate()">
 			<br>
 		</div>
-		<div class="flex-content" id="loading"></div>
+		<div class="flex-content" id="loading"><img width="50px" src="files/bach.gif" alt="Cargando..."></div>
 		<div class="flex-content" id="cont"></div>
 	</div>
     <script>
     	function showLoading() {
-	    document.getElementById('loading').innerHTML = `<img width="50px" src="files/bach.gif" alt="Cargando...">`;
-	    // document.getElementById('loading').style.display = 'block';
+	    // document.getElementById('loading').innerHTML = `<img width="50px" src="files/bach.gif" alt="Cargando...">`;
+	    document.getElementById('loading').style.display = 'block';
 	}
 	
 	function hideLoading() {
-	    document.getElementById('loading').innerHTML = ``
-	    // document.getElementById('loading').style.display = 'none';
+	    // document.getElementById('loading').innerHTML = ``
+	    document.getElementById('loading').style.display = 'none';
 	}
         function generate() {
 	    document.getElementById('cont').innerHTML = ``
