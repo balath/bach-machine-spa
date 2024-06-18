@@ -96,18 +96,12 @@ h1,h2 {
 }
 
 .loading {
-    display: none;
-    align-items: center;
-    justify-content: flex-start; 
-    width: 100%; 
-    padding: 20px; 
-    background: rgba(255, 255, 255, 0.8); 
-    border-radius: 10px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.loading img {
-    width: 50px; 
+    display: flex;
+    flex-direction: column; /* Cambia a columna para apilar los elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: flex-start; /* Alinea los elementos al inicio de la columna */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+    padding: 20px; /* Añade un poco de espacio alrededor */
 }
 
 footer {
