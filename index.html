@@ -27,7 +27,7 @@
 	
 		<div id="home-msg" align="center">
 			<br>
-			  <label for="tonos">Tono del Coral:</label> 
+			  <label for="tonos">Tono:</label> 
 			  <select class="select" id="tonos">
 				<option aria-label="do" value="c" selected>Do</option>
 				<option aria-label="do sostenido" value="cis">Do♯</option>
@@ -47,13 +47,13 @@
 			  <label for="modo">Modo:</label> 
 			  <select class="select" id="modo">
 				<option value="major" selected>Mayor</option>
-				<option value="minor">Menor</option>
+				<option value="minor">menor</option>
 			  </select>
 			  <br><br>
 			  <input class="select" type="button" value="Generar" onclick="generate()">
 			<br>
 		</div>
-		<div class="flex-content" id="loading"><img width="50px" src="files/bach.gif" alt="Cargando..."></div>
+		<div class="flex-content" id="loading"></div>
 		<div class="flex-content" id="cont"></div>
 	</div>
     <script>
