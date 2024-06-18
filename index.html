@@ -93,7 +93,7 @@
 
 		// Crear elementos para descargar el MIDI y mostrar el PDF
 		// create the player object using a file input by id or DOM Element
-		player=new MIDIPlayer(midiUrl);
+		player=new MIDIPlayer(`${midiUrl}`);
 		// register the onload function to start playing
 		player.onload = function(song){
 		    player.play();
