@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>Bach-machine</title>
 	<link href="styles/style.css" rel="stylesheet" type="text/css">
+	<script src="https://cdn.jsdelivr.net/npm/midi.js"></script>
 </head>
 
 <body>
@@ -89,19 +90,16 @@
                 const midiUrl = `${host}/midi/${midiId}`;
 
 		// Crear elementos para descargar el MIDI y mostrar el PDF
-		const midiPlayer = `<div class="midi-player" style="margin-bottom: 20px; text-align: center;">
-		                      <audio controls>
-		                        <source src="${midiUrl}" type="audio/midi">
-		                        Tu navegador no soporta la reproducción de archivos MIDI.
-		                      </audio>
-		                    </div>`;
+		const midiPlayerDiv = `<div id="midi-player" class="midi-player" style="margin-bottom: 20px; text-align: center;">
+                         <button onclick="playMIDI('${midiUrl}')" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Reproducir archivo MIDI</button>
+                       </div>`;
 		// const midiLink = `<div class="midi-button">
 		//                     <a href="${midiUrl}" download="choral.mid" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Descargar archivo MIDI</a>
 		//                   </div>`;
 		const pdfIframe = `<iframe src="${pdfUrl}" class="pdf-iframe" style="width: 100%; max-width: 1000px; height: 80vh; border: none;"></iframe>`;
 
 		// Mostrar resultados en el contenedor
-		document.getElementById('cont').innerHTML = `${midiPlayer}${pdfIframe}`;
+		document.getElementById('cont').innerHTML = `${midiPlayerDiv}${pdfIframe}`;
 
 
 		} catch (error) {
