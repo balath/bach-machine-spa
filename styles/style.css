@@ -44,12 +44,23 @@ h1,h2 {
 }
 
 .flex-content {
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: flex-start;
-  width: 100%; 
-  padding: 20px; 
+    display: flex;
+    flex-direction: column; /* Cambia a columna para apilar los elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: flex-start; /* Alinea los elementos al inicio de la columna */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+    padding: 20px; /* Añade un poco de espacio alrededor */
+}
+
+.midi-button {
+    margin-bottom: 20px; /* Añade espacio debajo del botón */
+}
+
+.pdf-iframe {
+    width: 100%; /* Asegura que el iframe ocupe todo el ancho del contenedor */
+    max-width: 1000px; /* Limita el ancho máximo */
+    height: 80vh; /* Ajusta la altura al 80% de la vista */
+    border: none; /* Elimina el borde del iframe */
 }
 
 #chords-table {
