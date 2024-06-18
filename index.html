@@ -58,12 +58,12 @@
 	</div>
     <script>
     	function showLoading() {
-	    // document.getElementById('loading').innerHTML = `<img width="50px" src="files/bach.gif" alt="Cargando...">`;
-	    document.getElementById('loading').style.display = 'block';
+	    document.getElementById('loading').innerHTML = `<img width="50px" src="files/bach.gif" alt="Cargando...">`;
+	document.getElementById('loading').style.display = 'flex';
 	}
 	
 	function hideLoading() {
-	    // document.getElementById('loading').innerHTML = ``
+	    document.getElementById('loading').innerHTML = ``
 	    document.getElementById('loading').style.display = 'none';
 	}
         function generate() {
