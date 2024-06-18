@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>Bach-machine</title>
 	<link href="styles/style.css" rel="stylesheet" type="text/css">
+	<script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
 </head>
 
 <body>
@@ -59,8 +60,6 @@
 		<div class="flex-content" id="cont"></div>
 	</div>
 
-	<script src="scripts/tau-prolog.js"></script>
-	<script src="scripts/prologString.js"></script>
 	<script src="scripts/main.js"></script>
     <script>
         function generate() {
@@ -90,7 +89,9 @@
 
 		// Crear elementos para descargar el MIDI y mostrar el PDF
 		const midiLink = `<div class="midi-button">
-		                    <a href="${midiUrl}" download="choral.mid" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Descargar archivo MIDI</a>
+			    	<midi-player
+				  src="${midiUrl}">
+				</midi-player>
 		                  </div>`;
 		const pdfIframe = `<iframe src="${pdfUrl}" class="pdf-iframe"></iframe>`;
 		
@@ -112,8 +113,6 @@
 
 <footer>
   <a href="mailto:sergio-flor@outlook.es"><img alt="Mail" src="files/mail32.png"></a>
-  <a href="http://tau-prolog.org/"><img alt="Tau-Prolog website" src="files/tauprolog32.png"></a>
-  <a href="https://twitter.com/balath83"><img alt="Twitter" src="files/twitter32.png"></a>  
 </footer>
 
 </html>
