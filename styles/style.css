@@ -63,6 +63,28 @@ h1,h2 {
     border: none; /* Elimina el borde del iframe */
 }
 
+.midi-player {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.midi-player audio {
+    width: 100%;
+    max-width: 600px; /* Limita el tamaño máximo del reproductor */
+}
+
+.midi-button {
+    margin-bottom: 20px;
+}
+
+.pdf-iframe {
+    width: 100%;
+    max-width: 1000px;
+    height: 80vh;
+    border: none;
+}
+
+
 #chords-table {
   border-collapse: collapse;
   width: 300px;
