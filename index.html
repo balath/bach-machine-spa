@@ -27,7 +27,6 @@
 	
 		<div id="home-msg" align="center">
 			<br>
-			  <br><br>
 			  <label for="tonos">Tono del Coral:</label> 
 			  <select class="select" id="tonos">
 				<option aria-label="do" value="c" selected>Do</option>
@@ -45,7 +44,6 @@
 				<option aria-label="si bemol" value="bis">Si♭</option>
 				<option aria-label="si" value="b">Si</option>
 			  </select>
-			  <br><br>
 			  <label for="modo">Modo:</label> 
 			  <select class="select" id="modo">
 				<option value="major" selected>Mayor</option>
@@ -73,27 +71,24 @@
                 return response.text();
 	    })
             .then(text => {
-                console.log('Response Text:', text); // Imprime la respuesta en texto
+                console.log('Response Text:', text); 
                 try {
-                    const data = JSON.parse(text); // Intenta parsear el JSON
+                    const data = JSON.parse(text); 
                     const pdfId = data.pdf;
                     const midiId = data.midi;
 
-                // Construir URLs
                 const pdfUrl = `${host}/pdf/${pdfId}`;
                 const midiUrl = `${host}/midi/${midiId}`;
 
-		// Crear elementos para descargar el MIDI y mostrar el PDF
-		const midiLink = `<div class="midi-button">
+		
+		const midiPlayer = `<div class="midi-button">
 			    	<midi-player
 				  src="${midiUrl}">
 				</midi-player>
 		                  </div>`;
 		const pdfIframe = `<iframe src="${pdfUrl}" class="pdf-iframe"></iframe>`;
 		
-		// Mostrar resultados en el contenedor
-		document.getElementById('cont').innerHTML = `${midiLink}${pdfIframe}`;
-
+		document.getElementById('cont').innerHTML = `${midiPlayer}${pdfIframe}`;
 
 		} catch (error) {
                     throw new Error(`Error parsing JSON: ${error.message}`);
