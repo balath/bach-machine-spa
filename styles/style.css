@@ -78,16 +78,16 @@ h1,h2 {
 }
 
 .select {
-  background-color: var(--hard-contrast); 
+  background-color: var(--medium-contrast); 
   border: none;
   border-radius: 8px;
   color: black;
-  padding: 10px 40px;
+  padding: 10px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 2px;
+  margin: 0px;
   opacity: 0.9;
 }
 
