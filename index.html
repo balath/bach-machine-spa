@@ -72,12 +72,18 @@
 	    console.log(url);	
 
             fetch(url)
-            .then(response => response.json())
-            .then(data => {
-		    console.log("Datos de la respuesta ")
-		    console.log(data);
-                const pdfId = data.pdf;
-                const midiId = data.midi;
+	    .then(response => {
+	    	if (!response.ok) {
+	    	throw new Error(`Error: ${response.statusText} (${response.status})`);
+                }
+                return response.text();
+	    })
+            .then(text => {
+                console.log('Response Text:', text); // Imprime la respuesta en texto
+                try {
+                    const data = JSON.parse(text); // Intenta parsear el JSON
+                    const pdfId = data.pdf;
+                    const midiId = data.midi;
 
                 // Construir URLs
                 const pdfUrl = `https://71f0-84-122-116-223.ngrok-free.app/pdf/${pdfId}`;
@@ -89,6 +95,9 @@
 
                 // Mostrar resultados en el contenedor
                 document.getElementById('cont').innerHTML = `<div>${pdfIframe}</div><div>${midiLink}</div>`;
+		} catch (error) {
+                    throw new Error(`Error parsing JSON: ${error.message}`);
+                }
             })
             .catch(error => {
 		    document.getElementById('cont').innerHTML = `<div style="color: red;">${error.message}</div>`;
