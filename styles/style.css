@@ -96,13 +96,16 @@ h1,h2 {
 }
 
 .loading {
-    display: flex;
-    text-align: center;
-    flex-direction: column; /* Cambia a columna para apilar los elementos verticalmente */
-    align-items: center; /* Centra los elementos horizontalmente */
-    justify-content: flex-start; /* Alinea los elementos al inicio de la columna */
-    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
-    padding: 20px; /* Añade un poco de espacio alrededor */
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Para que siempre esté en el mismo lugar */
+    top: 50%; /* Centrado verticalmente */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translate(-50%, -50%); /* Ajuste para centrar */
+    z-index: 1000; /* Para que esté por encima de otros elementos */
+    background: rgba(255, 255, 255, 0.8); /* Fondo semitransparente para destacar el GIF */
+    padding: 20px; /* Espacio alrededor del GIF */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra */
 }
 
 footer {
