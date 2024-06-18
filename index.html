@@ -53,11 +53,20 @@
 			  <input class="select" type="button" value="Generar" onclick="generate()">
 			<br>
 		</div>
+		<div class="flex-content" id="loading"><img src="files/bach.gif" alt="Cargando..."></div>
 		<div class="flex-content" id="cont"></div>
 	</div>
     <script>
+    	function showLoading() {
+	    document.getElementById('loading').style.display = 'block';
+	}
+	
+	function hideLoading() {
+	    document.getElementById('loading').style.display = 'none';
+	}
         function generate() {
-		const host = `https://4fde15ea018b373cb55531f4e2cb4a6e.serveo.net`
+	    showLoading();
+	    const host = `https://4fde15ea018b373cb55531f4e2cb4a6e.serveo.net`
             const key = document.getElementById('tonos').value;
             const mode = document.getElementById('modo').value;
             const url = `${host}/choral/${key}/${mode}`;
@@ -87,7 +96,7 @@
 				</midi-player>
 		                  </div>`;
 		const pdfIframe = `<iframe src="${pdfUrl}" class="pdf-iframe"></iframe>`;
-		
+		hideLoading();
 		document.getElementById('cont').innerHTML = `${midiPlayer}${pdfIframe}`;
 
 		} catch (error) {
@@ -95,7 +104,8 @@
                 }
             })
             .catch(error => {
-		    document.getElementById('cont').innerHTML = `<div><img alt="Bach" src="files/bach.png"></div><div>${error.message}</div>`;
+		    hideLoading();
+		    document.getElementById('cont').innerHTML = `<div><img width="50px" alt="Bach" src="files/bach.png"></div><div>${error.message}</div>`;
 	    });
         }
     </script>
