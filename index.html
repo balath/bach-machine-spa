@@ -5,9 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>Bach-machine</title>
 	<link href="styles/style.css" rel="stylesheet" type="text/css">
-	<script src='WebAudioFontPlayer.js'></script>
-	<script src='MIDIFile.js'></script>
-	<script src='MIDIPlayer.js'></script>
+	
 </head>
 
 <body>
@@ -91,30 +89,7 @@
                 const pdfUrl = `${host}/pdf/${pdfId}`;
                 const midiUrl = `${host}/midi/${midiId}`;
 
-		// Crear elementos para descargar el MIDI y mostrar el PDF
-		// create the player object using a file input by id or DOM Element
-		player=new MIDIPlayer(`${midiUrl}`);
-		// register the onload function to start playing
-		player.onload = function(song){
-		    player.play();
-		    var pos= document.getElementById("position");
-		    pos.setAttribute("max",song.duration);
-		}
-		// the tick event is triggered in every position change
-		player.ontick=function(song,position){
-		    var pos= document.getElementById("position");
-		    pos.value=position;
-		}
-		// stop playing when the window is unfocused
-		window.onblur=function(){
-		    console.log("Blur", new Date())
-		    player.pause();
-		}
-		// resume playing when window is in focus
-		window.onfocus=function(){
-		    console.log("Focus", new Date())
-		    player.play();
-		}
+		
 			
 		// const midiLink = `<div class="midi-button">
 		//                     <a href="${midiUrl}" download="choral.mid" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Descargar archivo MIDI</a>
@@ -123,15 +98,6 @@
 
 		// Mostrar resultados en el contenedor
 		document.getElementById('cont').innerHTML = `${pdfIframe}`;
-        })
-        .catch(error => {
-            console.error('Error al reproducir el archivo MIDI:', error);
-        });
-}
-
-		} catch (error) {
-                    throw new Error(`Error parsing JSON: ${error.message}`);
-                }
             })
             .catch(error => {
 		    document.getElementById('cont').innerHTML = `<div style="color: red;">${error.message}</div>`;
