@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>Bach-machine</title>
 	<link href="styles/style.css" rel="stylesheet" type="text/css">
-	<script src="https://cdn.jsdelivr.net/npm/midi.js@2.0.0"></script>
+	<script type='text/javascript' src='//www.midijs.net/lib/midi.js'></script>
 </head>
 
 <body>
@@ -91,7 +91,9 @@
 
 		// Crear elementos para descargar el MIDI y mostrar el PDF
 		const midiPlayerDiv = `<div id="midi-player" class="midi-player" style="margin-bottom: 20px; text-align: center;">
-                         <button onclick="playMIDI('${midiUrl}')" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Reproducir archivo MIDI</button>
+			 <button onclick="MIDIjs.play(${midiUrl});" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Reproducir coral</button>
+    			<button onclick="MIDIjs.pause();" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Deneter</button>
+    			<button onclick="MIDIjs.stop();" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Deneter</button>
                        </div>`;
 		// const midiLink = `<div class="midi-button">
 		//                     <a href="${midiUrl}" download="choral.mid" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Descargar archivo MIDI</a>
