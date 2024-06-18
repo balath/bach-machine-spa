@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>Bach-machine</title>
 	<link href="styles/style.css" rel="stylesheet" type="text/css">
-	<script src="https://cdn.jsdelivr.net/npm/midi.js"></script>
+	<script src="https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js"></script>
 </head>
 
 <body>
@@ -112,7 +112,27 @@
         }
 
 	function playMIDI(url) {
-	    MIDIjs.play(url);
+	    fetch(url)
+	        .then(response => response.arrayBuffer())
+	        .then(buffer => {
+	            const player = new WebAudioFontPlayer();
+	            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+	            player.loader.decodeAfterLoading(audioContext, '_tone_0000_JCLive_sf2_file');
+	            
+	            audioContext.decodeAudioData(buffer, (decodedData) => {
+	                player.queueWaveTable(
+	                    audioContext,
+	                    audioContext.destination,
+	                    player.loader.findInstrument('_tone_0000_JCLive_sf2_file'),
+	                    0, // when to play
+	                    buffer, // the MIDI buffer
+	                    120 // MIDI tempo (in beats per minute)
+	                );
+	            });
+	        })
+	        .catch(error => {
+	            console.error('Error al reproducir el archivo MIDI:', error);
+	        });
 	}
     </script>
 	<br><br>
