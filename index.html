@@ -5,7 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>Bach-machine</title>
 	<link href="styles/style.css" rel="stylesheet" type="text/css">
-	<script type='text/javascript' src='//www.midijs.net/lib/midi.js'></script>
+	<script src="bg-sound.min.js"></script>
+	<bg-sound src="sound.mid"></bg-sound>
 </head>
 
 <body>
@@ -90,18 +91,17 @@
                 const midiUrl = `${host}/midi/${midiId}`;
 
 		// Crear elementos para descargar el MIDI y mostrar el PDF
-		const midiPlayerDiv = `<div id="midi-player" class="midi-player" style="margin-bottom: 20px; text-align: center;">
-			 <a href="#" onClick="MIDIjs.play('midi/hinematov.mid');">Play </a>
-    			<a href="#" onClick="MIDIjs.pause();">Pause</a>
-    			<a href="#" onClick="MIDIjs.stop();">Stop</a>
-                       </div>`;
+		const player = new Timidity();
+		player.load(midiUrl)
+		player.play
+			
 		// const midiLink = `<div class="midi-button">
 		//                     <a href="${midiUrl}" download="choral.mid" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Descargar archivo MIDI</a>
 		//                   </div>`;
 		const pdfIframe = `<iframe src="${pdfUrl}" class="pdf-iframe" style="width: 100%; max-width: 1000px; height: 80vh; border: none;"></iframe>`;
 
 		// Mostrar resultados en el contenedor
-		document.getElementById('cont').innerHTML = `${midiPlayerDiv}${pdfIframe}`;
+		document.getElementById('cont').innerHTML = `${pdfIframe}`;
 		function playMIDI(url) {
 		    fetch(url)
 		        .then(response => response.arrayBuffer())
