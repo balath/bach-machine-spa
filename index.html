@@ -59,11 +59,12 @@
     <script>
     	function showLoading() {
 	    document.getElementById('loading').innerHTML = `<img width="50px" src="files/bach.gif" alt="Cargando...">`;
-	    document.getElementById('loading').style.display = 'block';
+	    // document.getElementById('loading').style.display = 'block';
 	}
 	
 	function hideLoading() {
-	    document.getElementById('loading').style.display = 'none';
+	    document.getElementById('loading').innerHTML = ``
+	    // document.getElementById('loading').style.display = 'none';
 	}
         function generate() {
 	    document.getElementById('cont').innerHTML = ``
@@ -82,7 +83,6 @@
                 return response.text();
 	    })
             .then(text => {
-                console.log('Response Text:', text); 
                 try {
                     const data = JSON.parse(text); 
                     const pdfId = data.pdf;
