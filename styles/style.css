@@ -78,11 +78,11 @@ h1,h2 {
 }
 
 .select {
-  background-color: var(--medium-contrast); 
+  background-color: var(--hard-contrast); 
   border: none;
   border-radius: 8px;
   color: black;
-  padding: 10px 50px;
+  padding: 10px 40px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
