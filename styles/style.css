@@ -97,6 +97,7 @@ h1,h2 {
 
 .loading {
     display: flex;
+    text-align: center;
     flex-direction: column; /* Cambia a columna para apilar los elementos verticalmente */
     align-items: center; /* Centra los elementos horizontalmente */
     justify-content: flex-start; /* Alinea los elementos al inicio de la columna */
