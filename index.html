@@ -91,9 +91,9 @@
 
 		// Crear elementos para descargar el MIDI y mostrar el PDF
 		const midiPlayerDiv = `<div id="midi-player" class="midi-player" style="margin-bottom: 20px; text-align: center;">
-			 <button onclick="MIDIjs.play(${midiUrl});" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Reproducir coral</button>
-    			<button onclick="MIDIjs.pause();" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Deneter</button>
-    			<button onclick="MIDIjs.stop();" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Deneter</button>
+			 <a href="#" onClick="MIDIjs.play('midi/hinematov.mid');">Play </a>
+    			<a href="#" onClick="MIDIjs.pause();">Pause</a>
+    			<a href="#" onClick="MIDIjs.stop();">Stop</a>
                        </div>`;
 		// const midiLink = `<div class="midi-button">
 		//                     <a href="${midiUrl}" download="choral.mid" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Descargar archivo MIDI</a>
