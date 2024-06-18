@@ -68,11 +68,6 @@ h1,h2 {
     margin-bottom: 20px;
 }
 
-.midi-player audio {
-    width: 100%;
-    max-width: 600px; /* Limita el tamaño máximo del reproductor */
-}
-
 .midi-button {
     margin-bottom: 20px;
 }
@@ -83,7 +78,6 @@ h1,h2 {
     height: 80vh;
     border: none;
 }
-
 
 #chords-table {
   border-collapse: collapse;
