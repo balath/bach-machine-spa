@@ -69,7 +69,7 @@
         function generate() {
 	    document.getElementById('cont').innerHTML = ``
 	    showLoading();
-	    const host = `http://bach-machine.is-an-artist.com:9090`
+	    const host = `https://bach-machine.is-an-artist.com:9090`
             const key = document.getElementById('tonos').value;
             const mode = document.getElementById('modo').value;
             const url = `${host}/choral/${key}/${mode}`;
