@@ -69,13 +69,20 @@
         function generate() {
 	    document.getElementById('cont').innerHTML = ``
 	    showLoading();
-	    const host = `84.122.116.223:9090`
+	    const host = `bach-machine.is-an-artist.com:9090`
             const key = document.getElementById('tonos').value;
             const mode = document.getElementById('modo').value;
             const url = `${host}/choral/${key}/${mode}`;
 	    console.log(url);	
 
-            fetch(url)
+            fetch(url, {
+		    method: 'GET',
+		    headers: {
+		        'Content-Type': 'application/json',
+		        'Access-Control-Allow-Origin': '*'
+		    },
+		    mode: 'cors'
+	    })
 	    .then(response => {
 	    	if (!response.ok) {
 	    	throw new Error(`Error: ${response.statusText} (${response.status})`);
