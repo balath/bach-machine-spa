@@ -68,6 +68,7 @@
 	}
         function generate() {
 	    document.getElementById('cont').innerHTML = ``
+	    document.getElementById('midi-player').stop()
 	    showLoading();
 	    const host = `https://a4bf1622bba5593e2892fd050f760e6a.serveo.net`
             const key = document.getElementById('tonos').value;
@@ -101,6 +102,7 @@
 		
 		const midiPlayer = `<div class="midi-button">
 			    	<midi-player
+				  id="midi-player"
 				  src="${midiUrl}">
 				</midi-player>
 		                  </div>`;
