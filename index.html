@@ -68,13 +68,13 @@
 	}
         function generate() {
 	    document.getElementById('cont').innerHTML = ``
-	    document.getElementById('midi-player').stop()
+	    const mP = document.getElementById('midi-player')
+	    if (midiPlayer) { midiPlayer.stop(); }
 	    showLoading();
 	    const host = `https://242c10b7a6ade3d33cf7e5433750e55a.serveo.net`
             const key = document.getElementById('tonos').value;
             const mode = document.getElementById('modo').value;
             const url = `${host}/choral/${key}/${mode}`;
-	    console.log(url);	
 
             fetch(url, {
 		    method: 'GET',
