@@ -67,10 +67,11 @@
 	    document.getElementById('loading').style.display = 'none';
 	}
         function generate() {
-	    document.getElementById('cont').innerHTML = ``
-	    
+	    document.getElementById('cont').innerHTML = ``	
+	    // let mp = document.getElementById('midiPlayer');
+	    // mp.stop();
 	    showLoading();
-	    const host = `https://9e469ce628758f0606836c25956f8e27.serveo.net`
+	    const host = `https://20ffa451e9ab5e8ed59dac9c69bf98d7.serveo.net`
             const key = document.getElementById('tonos').value;
             const mode = document.getElementById('modo').value;
             const url = `${host}/choral/${key}/${mode}`;
@@ -101,7 +102,7 @@
 		
 		const midiPlayer = `<div class="midi-button">
 			    	<midi-player
-				  id="midi-player"
+				  id="midiPlayer"
 				  src="${midiUrl}">
 				</midi-player>
 		                  </div>`;
