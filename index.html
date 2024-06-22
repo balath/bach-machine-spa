@@ -16,15 +16,6 @@
 			<h1>Bach-machine</h1>
 			<p>Su generador inteligente de corales</p>
 		</div>
-		
-<!-- 		<div class="flex-button-bar">
-		
-		  <button class="button" onclick="loadHome()">Inicio</button>
-		  <button class="button" onclick="loadPrologFile()">Código Prolog</button>
-		  <button class="button" onclick="location.href='https://github.com/balath/balath.github.io/raw/master/files/memoria.pdf';">Memoria</button>
-		  
-		</div> -->
-	
 		<div id="home-msg" align="center">
 			<br>
 			  <label for="tonos">Tono:</label> 
@@ -54,76 +45,69 @@
 			<br>
 		</div>
 		<div class="flex-content" id="loading"></div>
-		<div class="flex-content" id="cont">
-			<div class="midi-button"><midi-player id="midiPlayer"> </midi-player></div>
-		</div>
+		<div class="flex-content" id="cont"></div>
 	</div>
-    <script>
-    	function showLoading() {
-	    document.getElementById('loading').innerHTML = `<img width="50px" src="files/bach.gif" alt="Cargando...">`;
-	document.getElementById('loading').style.display = 'flex';
+<script>
+function showLoading() {
+    document.getElementById('loading').innerHTML = `<img width="50px" src="files/bach.gif" alt="Cargando...">`;
+document.getElementById('loading').style.display = 'flex';
+}
+
+function hideLoading() {
+    document.getElementById('loading').innerHTML = ``
+    document.getElementById('loading').style.display = 'none';
+}
+function generate() {
+    document.getElementById('cont').innerHTML = ``
+    showLoading();
+    const host = `https://bach-machine-02a43fd154c6.herokuapp.com`
+    const key = document.getElementById('tonos').value;
+    const mode = document.getElementById('modo').value;
+    const url = `${host}/choral/${key}/${mode}`;
+
+    fetch(url, {
+	    method: 'GET',
+	    headers: {
+		'Content-Type': 'application/json',
+		'Access-Control-Allow-Origin': '*'
+	    },
+	    mode: 'cors'
+    })
+    .then(response => {
+	if (!response.ok) {
+	throw new Error(`Error: ${response.statusText} (${response.status})`);
 	}
-	
-	function hideLoading() {
-	    document.getElementById('loading').innerHTML = ``
-	    document.getElementById('loading').style.display = 'none';
+	return response.text();
+    })
+    .then(text => {
+	try {
+	  const data = JSON.parse(text); 
+	  const pdfId = data.pdf;
+	  const midiId = data.midi;
+
+	  const pdfUrl = `${host}/pdf/${pdfId}`;
+	  const midiUrl = `${host}/midi/${midiId}`;		
+	  const midiPlayer = `<div class="midi-button">
+			<midi-player
+			  id="midiPlayer"
+			  src="${midiUrl}">
+			</midi-player>
+			  </div>`;
+	  const pdfIframe = `<iframe src="${pdfUrl}" class="pdf-iframe"></iframe>`;
+	  hideLoading();
+	  document.getElementById('cont').innerHTML = `${midiPlayer}${pdfIframe}`;
+
+	} catch (error) {
+	    throw new Error(`Error parsing JSON: ${error.message}`);
 	}
-        function generate() {
-	    document.getElementById('cont').innerHTML = ``	
-	    let mp = document.getElementById('midiPlayer');
-	    mp.stop();
-	    showLoading();
-	    const host = `https://bach-machine-02a43fd154c6.herokuapp.com`
-            const key = document.getElementById('tonos').value;
-            const mode = document.getElementById('modo').value;
-            const url = `${host}/choral/${key}/${mode}`;
-
-            fetch(url, {
-		    method: 'GET',
-		    headers: {
-		        'Content-Type': 'application/json',
-		        'Access-Control-Allow-Origin': '*'
-		    },
-		    mode: 'cors'
-	    })
-	    .then(response => {
-	    	if (!response.ok) {
-	    	throw new Error(`Error: ${response.statusText} (${response.status})`);
-                }
-                return response.text();
-	    })
-            .then(text => {
-                try {
-                    const data = JSON.parse(text); 
-                    const pdfId = data.pdf;
-                    const midiId = data.midi;
-
-                const pdfUrl = `${host}/pdf/${pdfId}`;
-                const midiUrl = `${host}/midi/${midiId}`;
-
-		
-		// const midiPlayer = `<div class="midi-button">
-		// 	    	<midi-player
-		// 		  id="midiPlayer"
-		// 		  src="${midiUrl}">
-		// 		</midi-player>
-		//                   </div>`;
-		const pdfIframe = `<iframe src="${pdfUrl}" class="pdf-iframe"></iframe>`;
-		hideLoading();
-		mp.src = "midiUrl";
-		document.getElementById('cont').innerHTML = `${midiPlayer}${pdfIframe}`;
-
-		} catch (error) {
-                    throw new Error(`Error parsing JSON: ${error.message}`);
-                }
-            })
-            .catch(error => {
-		    hideLoading();
-		    document.getElementById('cont').innerHTML = `<div><img width="50px" alt="Bach" src="files/bach.png"></div><div>${error.message}</div>`;
-	    });
-        }
-    </script>
-	<br><br>
+    })
+    .catch(error => {
+	  hideLoading();
+	  document.getElementById('cont').innerHTML = `<div><img width="50px" alt="Bach" src="files/bach.png"></div><div>${error.message}</div>`;
+    });
+}
+</script>
+<br><br>
 </body>
 
 <footer>
