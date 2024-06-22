@@ -69,7 +69,7 @@
         function generate() {
 	    document.getElementById('cont').innerHTML = ``	
 	    let mp = document.getElementById('midiPlayer');
-	    mp.stop();
+	    if (mp) { mp.stop(); }
 	    showLoading();
 	    const host = `https://bach-machine-02a43fd154c6.herokuapp.com`
             const key = document.getElementById('tonos').value;
