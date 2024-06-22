@@ -54,7 +54,9 @@
 			<br>
 		</div>
 		<div class="flex-content" id="loading"></div>
-		<div class="flex-content" id="cont"></div>
+		<div class="flex-content" id="cont">
+			<div class="midi-button"><midi-player id="midiPlayer"> </midi-player></div>
+		</div>
 	</div>
     <script>
     	function showLoading() {
@@ -69,7 +71,7 @@
         function generate() {
 	    document.getElementById('cont').innerHTML = ``	
 	    let mp = document.getElementById('midiPlayer');
-	    if (mp) { mp.stop(); }
+	    mp.stop();
 	    showLoading();
 	    const host = `https://bach-machine-02a43fd154c6.herokuapp.com`
             const key = document.getElementById('tonos').value;
@@ -100,14 +102,15 @@
                 const midiUrl = `${host}/midi/${midiId}`;
 
 		
-		const midiPlayer = `<div class="midi-button">
-			    	<midi-player
-				  id="midiPlayer"
-				  src="${midiUrl}">
-				</midi-player>
-		                  </div>`;
+		// const midiPlayer = `<div class="midi-button">
+		// 	    	<midi-player
+		// 		  id="midiPlayer"
+		// 		  src="${midiUrl}">
+		// 		</midi-player>
+		//                   </div>`;
 		const pdfIframe = `<iframe src="${pdfUrl}" class="pdf-iframe"></iframe>`;
 		hideLoading();
+		mp.src = "midiUrl";
 		document.getElementById('cont').innerHTML = `${midiPlayer}${pdfIframe}`;
 
 		} catch (error) {
