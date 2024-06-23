@@ -62,9 +62,9 @@ function hideLoading() {
     document.getElementById('loading').style.display = 'none';
 }
 function generate() {
-    document.getElementById('cont').innerHTML = ``
     const midiPlayer = document.querySelector("div.midi-button midi-player")
     if (midiPlayer) { midiPlayer.player.stop(); }
+    document.getElementById('cont').innerHTML = ``
     showLoading();
     const host = `https://bach-machine-02a43fd154c6.herokuapp.com`
     const key = document.getElementById('tonos').value;
