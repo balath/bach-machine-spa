@@ -98,9 +98,20 @@ function generate() {
 			  sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus"
 			  src="${midiUrl}">
 			</midi-player>
-   			<a href="${midiUrl}"><img alt="Midi file" src="files/audioDownload.png"></a>
+   			<a  id="downloadLink" href="#" download="choral${midiId}.mid"><img alt="Midi file" src="files/audioDownload32.png"></a>
 			  </div>`;
 	  const pdfIframe = `<iframe src="${pdfUrl}" class="pdf-iframe"></iframe>`;
+	  fetch(midiUrl)
+	    .then(response => response.blob())
+	    .then(blob => {
+  	      // Crea un URL para el Blob y lo asigna al enlace de descarga
+	      const url = URL.createObjectURL(blob);
+	      const downloadLink = document.getElementById("downloadLink");
+	      downloadLink.href = url;
+	  })
+	    .catch(error => {
+  	      console.error("Error al descargar el archivo:", error);
+	  });		
 	  hideLoading();
 	  document.getElementById('cont').innerHTML = `${midiPlayer}${pdfIframe}`;
 
